@@ -44,10 +44,9 @@ predict.milr <- function(object, newdata = NULL, bag_newdata = NULL, type = "bag
     stop("bag_newdata cannot be NULL!")
   
   if (type == "bag") {
-    return(coef(object) %>>% getMilrProb(cbind(1, newdata), bag_newdata) %>>%
-             `>`(0.5) %>>% as.numeric)
+    return(coef(object) %>>% getMilrProb(cbind(1, newdata), bag_newdata))
   } else if (type == "instance") {
-    return(logit(cbind(1, newdata), coef(object)) %>>% `>`(0.5) %>>% as.numeric)
+    return(logit(cbind(1, newdata), coef(object)))
   }
 }
 
